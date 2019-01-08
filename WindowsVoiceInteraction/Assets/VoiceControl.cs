@@ -22,6 +22,8 @@ public class VoiceControl : MonoBehaviour
     void Start()
     {
         cubeRend = GetComponent<MeshRenderer>();
+        cubeRend.enabled = false;
+
         soundSource = GetComponent<AudioSource>();
 
         //Voice commands for changing color
@@ -29,6 +31,9 @@ public class VoiceControl : MonoBehaviour
         keyActs.Add("green", Green);
         keyActs.Add("blue", Blue);
         keyActs.Add("white", White);
+
+        //Voice commands to create a box
+        keyActs.Add("create a box", CreateBox);
 
         //Voice commands for spinning
         keyActs.Add("spin right", SpinRight);
@@ -50,7 +55,10 @@ public class VoiceControl : MonoBehaviour
         Debug.Log("Command: " + args.text);
         keyActs[args.text].Invoke();
     }
-
+    void CreateBox()
+    {
+        cubeRend.enabled = true;
+    }
     void Red()
     {
         cubeRend.material.SetColor("_Color", Color.red);
@@ -98,8 +106,8 @@ public class VoiceControl : MonoBehaviour
     }
     void Talk()
     {
-        soundSource.clip = sounds[UnityEngine.Random.Range(0, sounds.Length)];
-        soundSource.Play();
+       // soundSource.clip = sounds[UnityEngine.Random.Range(0, sounds.Length)];
+       // soundSource.Play();
     }
     void FactAcknowledgement()
     {
